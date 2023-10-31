@@ -1,0 +1,43 @@
+world-size: 1
+#seed: None
+
+data: "/home/chenjunfen/workspace/Dataset"   # help='path to dataset
+arch: "resnet34"  # ResNet18 / ResNet34 / ResNet50
+workers: 16
+batch-size: 256
+epochs: 500
+start-epoch: 0
+
+lr: 0.03
+weight-decay: 0.0001
+model_path: "save/CIFAR-10" # # CIFAR-10 / CIFAR-100 / STL-10 / ImageNet-10 / ImageNet-dogs / tiny-ImageNet
+
+reload: false
+resume: 199
+
+schedule: [120, 160]
+momentum: 0.9
+print-freq: 10   # print frequency (default: 10)
+rank: 0
+dist-url: "tcp://localhost:10001" # tcp://localhost:10001 / tcp://224.66.41.62:23456
+dist-backend: "nccl"
+multiprocessing-distributed: True
+
+# moco specific configs:
+moco-dim: 128
+moco-k: 65536
+moco-m: 0.999
+moco-t: 0.2
+
+# options for moco v2
+mlp: True
+aug-plus: True
+cos: True
+
+# python main_lincls.py \
+  #  -a resnet50 \
+  #  --lr 30.0 \
+  #  --batch-size 256 \
+  #  --pretrained [your checkpoint path]/checkpoint_0199.pth.tar \
+#  --dist-url 'tcp://localhost:10001' --multiprocessing-distributed --world-size 1 --rank 0 \
+#  [your imagenet-folder with train and val folders]

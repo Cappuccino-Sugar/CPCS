@@ -1,0 +1,42 @@
+world-size: 1
+workers: 8
+batch-size: 512
+image_size: 224
+epochs: 200
+start-epoch: 0
+#seed: None
+
+arch: "resnet34"    # ResNet18 / ResNet34 / ResNet50
+dataset: "ImageNet-dogs"   # CIFAR-10 / CIFAR-100 / STL-10 / ImageNet-10 / ImageNet-dogs / tiny-ImageNet
+model_path: "save/stage_2/ImageNet-dogs/one1000_5/"    #/loss124_500 /only_instanc/stage_2 /ad_clu/  CIFAR-10 / CIFAR-100 / STL-10 / ImageNet-10 / ImageNet-dogs / tiny-ImageNet
+dataset_dir: "/home/chenjunfen/workspace/Dataset"   # help='path to dataset
+
+lr: 0.30
+schedule: [120, 160]
+momentum: 0.9
+weight-decay: 0.0001
+print-freq: 10   # print frequency (default: 10)
+
+rank: 0
+dist-url: "tcp://localhost:10012" # tcp://localhost:10001 / tcp://224.66.41.62:23456
+dist-backend: "nccl"
+multiprocessing-distributed: True
+
+pretrained: True
+reload: True
+resume: 0
+evaluate: True
+
+# moco specific configs:
+moco-dim: 128
+moco-k: 65536
+moco-m: 0.999
+moco-t: 0.2
+
+# options for moco v2
+mlp: True
+aug-plus: false
+cos: True
+
+# export OMP_NUM_THREADS=1
+# export OPENBLAS_NUM_THREADS=1
